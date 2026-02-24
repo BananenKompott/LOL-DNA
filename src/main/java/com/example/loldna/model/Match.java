@@ -5,14 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 
+import java.time.LocalDateTime;
+
 @Entity
-public class Match {
+class Match {
 
     @Id
-    @Column(name = "match_ID")
-    private String matchId;
+    private String matchId; // Riot match id
 
-    @Lob
-    @Column(name = "response")
-    private String response;
+    private LocalDateTime gameStartTime;
+    private Integer gameDuration;
+    private String queueType;
+
+    private Double averageRank; // Optional OZ01
+
+    private LocalDateTime cachedAt;
 }
