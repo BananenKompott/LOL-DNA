@@ -1,4 +1,4 @@
-package com.example.loldna.model;
+package com.example.loldna.entity;
 
 import jakarta.persistence.*;
 

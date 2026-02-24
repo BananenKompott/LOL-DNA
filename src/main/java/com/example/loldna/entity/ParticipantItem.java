@@ -1,4 +1,4 @@
-package com.example.loldna.model;
+package com.example.loldna.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-class ParticipantRune {
+class ParticipantItem {
 
     @Id
     @GeneratedValue
@@ -15,5 +15,5 @@ class ParticipantRune {
     @ManyToOne
     private MatchParticipant participant;
 
-    private Integer runeId;
+    private Integer itemId;
 }
