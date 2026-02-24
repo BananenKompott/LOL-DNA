@@ -1,4 +1,4 @@
-package com.sew.yousong.controller;
+package com.example.loldna.controller;
 
 import com.example.loldna.entity.Match;
 import com.example.loldna.repository.MatchRepository;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/artists")
+@RequestMapping("/api/match")
 @CrossOrigin(origins = "*")
 public class MatchController {
 
@@ -21,8 +21,8 @@ public class MatchController {
     }
 
     @GetMapping
-    public List<Match> getAllArtists() {
-        return artistRepository.findAll();
+    public List<Match> getAllMatches() {
+        return matchRepository.findAll();
     }
 }
 

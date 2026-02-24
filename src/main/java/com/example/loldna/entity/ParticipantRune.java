@@ -16,4 +16,28 @@ class ParticipantRune {
     private MatchParticipant participant;
 
     private Integer runeId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public MatchParticipant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(MatchParticipant participant) {
+        this.participant = participant;
+    }
+
+    public Integer getRuneId() {
+        return runeId;
+    }
+
+    public void setRuneId(Integer runeId) {
+        this.runeId = runeId;
+    }
 }
