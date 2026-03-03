@@ -1,16 +1,9 @@
 package com.example.loldna.DTO;
 
-import java.time.LocalDateTime;
-import java.util.List;
+public class EnemyDTO {
 
-public class
-MatchOverviewDTO {
-
-    private String matchId;
-    private LocalDateTime gameStartTime;
-
-    private boolean win;
-
+    private String gameName;
+    private String tagLine;
     private String championName;
 
     private int kills;
@@ -20,31 +13,26 @@ MatchOverviewDTO {
     private int damageDealt;
     private int damageTaken;
 
-    private List<TeamMateDTO> teamMates;
-    private List<EnemyDTO> enemyTeam;
+    private double kda;
 
-    public String getMatchId() {
-        return matchId;
+    private String tier;
+    private String rank;
+    private Integer leaguePoints;
+
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setMatchId(String matchId) {
-        this.matchId = matchId;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
-    public LocalDateTime getGameStartTime() {
-        return gameStartTime;
+    public String getTagLine() {
+        return tagLine;
     }
 
-    public void setGameStartTime(LocalDateTime gameStartTime) {
-        this.gameStartTime = gameStartTime;
-    }
-
-    public boolean isWin() {
-        return win;
-    }
-
-    public void setWin(boolean win) {
-        this.win = win;
+    public void setTagLine(String tagLine) {
+        this.tagLine = tagLine;
     }
 
     public String getChampionName() {
@@ -95,19 +83,35 @@ MatchOverviewDTO {
         this.damageTaken = damageTaken;
     }
 
-    public List<TeamMateDTO> getTeamMates() {
-        return teamMates;
+    public double getKda() {
+        return kda;
     }
 
-    public void setTeamMates(List<TeamMateDTO> teamMates) {
-        this.teamMates = teamMates;
+    public void setKda(double kda) {
+        this.kda = kda;
     }
 
-    public List<EnemyDTO> getEnemyTeam() {
-        return enemyTeam;
+    public String getTier() {
+        return tier;
     }
 
-    public void setEnemyTeam(List<EnemyDTO> enemyTeam) {
-        this.enemyTeam = enemyTeam;
+    public void setTier(String tier) {
+        this.tier = tier;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public Integer getLeaguePoints() {
+        return leaguePoints;
+    }
+
+    public void setLeaguePoints(Integer leaguePoints) {
+        this.leaguePoints = leaguePoints;
     }
 }

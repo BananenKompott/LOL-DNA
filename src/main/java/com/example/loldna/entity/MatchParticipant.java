@@ -16,6 +16,13 @@ public class MatchParticipant {
 
     private String puuid;
 
+    // For displaying Riot ID (gameName#tagLine)
+    private String gameName;
+    private String tagLine;
+
+    // To identify team mates vs enemies
+    private Integer teamId;
+
     private String championName;
 
     private Integer kills;
@@ -63,6 +70,30 @@ public class MatchParticipant {
 
     public void setPuuid(String puuid) {
         this.puuid = puuid;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+
+    public String getTagLine() {
+        return tagLine;
+    }
+
+    public void setTagLine(String tagLine) {
+        this.tagLine = tagLine;
+    }
+
+    public Integer getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 
     public String getChampionName() {

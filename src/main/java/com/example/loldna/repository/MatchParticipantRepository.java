@@ -16,4 +16,6 @@ public interface MatchParticipantRepository extends JpaRepository<MatchParticipa
         ORDER BY m.gameStartTime DESC
     """)
     List<MatchParticipant> findLatestMatchesByPuuid(String puuid);
+
+    List<MatchParticipant> findByMatch_MatchId(String matchId);
 }
