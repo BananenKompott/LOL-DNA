@@ -3,7 +3,8 @@ package com.example.loldna.DTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class MatchOverviewDTO {
+public class
+MatchOverviewDTO {
 
     private String matchId;
     private LocalDateTime gameStartTime;
