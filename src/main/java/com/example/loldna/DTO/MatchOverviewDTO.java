@@ -70,7 +70,7 @@ MatchOverviewDTO {
     public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
-
+// BIG Bubensahne ist geil
     public int getAssists() {
         return assists;
     }
