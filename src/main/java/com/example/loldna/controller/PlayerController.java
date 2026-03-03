@@ -2,12 +2,10 @@ package com.example.loldna.controller;
 
 import com.example.loldna.DTO.PlayerOverviewDTO;
 import com.example.loldna.service.PlayerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/players")
-@RequiredArgsConstructor
 public class PlayerController {
 
     private final PlayerService playerService;
