@@ -307,6 +307,20 @@ public class PlayerServiceImpl implements PlayerService {
                         t.setTagLine(p.getTagLine());
                         t.setChampionName(p.getChampionName());
 
+                        int kills = p.getKills() == null ? 0 : p.getKills();
+                        int deaths = p.getDeaths() == null ? 0 : p.getDeaths();
+                        int assists = p.getAssists() == null ? 0 : p.getAssists();
+
+                        t.setKills(kills);
+                        t.setDeaths(deaths);
+                        t.setAssists(assists);
+
+                        t.setDamageDealt(p.getTotalDamageDealt() == null ? 0 : p.getTotalDamageDealt());
+                        t.setDamageTaken(p.getTotalDamageTaken() == null ? 0 : p.getTotalDamageTaken());
+
+                        double kda = (kills + assists) / (double) Math.max(1, deaths);
+                        t.setKda(kda);
+
                         Player ranked = ensureRankCached(p.getPuuid(), budget, localRankCache);
                         t.setRank(ranked.getRank());
                         t.setTier(ranked.getTier());

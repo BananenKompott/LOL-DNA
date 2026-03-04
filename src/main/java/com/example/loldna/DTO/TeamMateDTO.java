@@ -10,6 +10,15 @@ public class TeamMateDTO {
     private String rank;
     private Integer leaguePoints;
 
+    private Integer kills;
+    private Integer deaths;
+    private Integer assists;
+
+    private Integer damageDealt;
+    private Integer damageTaken;
+
+    private Double kda;
+
     public String getGameName() {
         return gameName;
     }
@@ -56,5 +65,53 @@ public class TeamMateDTO {
 
     public void setLeaguePoints(Integer leaguePoints) {
         this.leaguePoints = leaguePoints;
+    }
+
+    public Integer getKills() {
+        return kills;
+    }
+
+    public void setKills(Integer kills) {
+        this.kills = kills;
+    }
+
+    public Integer getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(Integer deaths) {
+        this.deaths = deaths;
+    }
+
+    public Integer getAssists() {
+        return assists;
+    }
+
+    public void setAssists(Integer assists) {
+        this.assists = assists;
+    }
+
+    public Integer getDamageDealt() {
+        return damageDealt;
+    }
+
+    public void setDamageDealt(Integer damageDealt) {
+        this.damageDealt = damageDealt;
+    }
+
+    public Integer getDamageTaken() {
+        return damageTaken;
+    }
+
+    public void setDamageTaken(Integer damageTaken) {
+        this.damageTaken = damageTaken;
+    }
+
+    public Double getKda() {
+        return kda;
+    }
+
+    public void setKda(Double kda) {
+        this.kda = kda;
     }
 }
