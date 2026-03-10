@@ -4,11 +4,14 @@ import com.example.loldna.DTO.EnemyDTO;
 import com.example.loldna.DTO.MatchOverviewDTO;
 import com.example.loldna.DTO.PlayerOverviewDTO;
 import com.example.loldna.DTO.TeamMateDTO;
+import com.example.loldna.DTO.RuneDTO;
 import com.example.loldna.DTO.riot.RiotAccountDTO;
 import com.example.loldna.DTO.riot.RiotLeagueEntryDTO;
 import com.example.loldna.DTO.riot.RiotMatchDTO;
 import com.example.loldna.entity.Match;
 import com.example.loldna.entity.MatchParticipant;
+import com.example.loldna.entity.ParticipantItem;
+import com.example.loldna.entity.ParticipantRune;
 import com.example.loldna.entity.Player;
 import com.example.loldna.exception.PlayerNotFoundException;
 import com.example.loldna.repository.MatchParticipantRepository;
@@ -41,17 +44,20 @@ public class PlayerServiceImpl implements PlayerService {
     private final MatchParticipantRepository participantRepository;
     private final MatchRepository matchRepository;
     private final RiotApiClient riotApiClient;
+    private final RuneLookupService runeLookupService;
 
     public PlayerServiceImpl(
             PlayerRepository playerRepository,
             MatchParticipantRepository participantRepository,
             MatchRepository matchRepository,
-            RiotApiClient riotApiClient
+            RiotApiClient riotApiClient,
+            RuneLookupService runeLookupService
     ) {
         this.playerRepository = playerRepository;
         this.participantRepository = participantRepository;
         this.matchRepository = matchRepository;
         this.riotApiClient = riotApiClient;
+        this.runeLookupService = runeLookupService;
     }
 
     @Override
@@ -238,6 +244,33 @@ public class PlayerServiceImpl implements PlayerService {
                             mp.setCsPerMinute(p.getTotalMinionsKilled() / minutes);
                         }
 
+                        // Map rune IDs from Match V5 perks into ParticipantRune entities
+                        RiotMatchDTO.Participant.Perks perks = p.getPerks();
+                        if (perks != null && perks.getStyles() != null) {
+                            List<ParticipantRune> runes = perks.getStyles().stream()
+                                    .filter(Objects::nonNull)
+                                    .flatMap(style -> {
+                                        if (style.getSelections() == null) {
+                                            return java.util.stream.Stream.<ParticipantRune>empty();
+                                        }
+                                        return style.getSelections().stream()
+                                                .filter(Objects::nonNull)
+                                                .map(sel -> sel.getPerk())
+                                                .filter(Objects::nonNull)
+                                                .map(runeId -> {
+                                                    ParticipantRune r = new ParticipantRune();
+                                                    r.setParticipant(mp);
+                                                    r.setRuneId(runeId);
+                                                    return r;
+                                                });
+                                    })
+                                    .collect(Collectors.toList());
+
+                            if (!runes.isEmpty()) {
+                                mp.setRunes(runes);
+                            }
+                        }
+
                         return mp;
                     })
                     .filter(Objects::nonNull)
@@ -281,8 +314,10 @@ public class PlayerServiceImpl implements PlayerService {
 
         MatchOverviewDTO dto = new MatchOverviewDTO();
 
-        dto.setMatchId(participant.getMatch().getMatchId());
-        dto.setGameStartTime(participant.getMatch().getGameStartTime());
+        Match match = participant.getMatch();
+
+        dto.setMatchId(match != null ? match.getMatchId() : null);
+        dto.setGameStartTime(match != null ? match.getGameStartTime() : null);
         dto.setWin(Boolean.TRUE.equals(participant.getWin()));
 
         dto.setChampionName(participant.getChampionName());
@@ -292,6 +327,51 @@ public class PlayerServiceImpl implements PlayerService {
 
         dto.setDamageDealt(participant.getTotalDamageDealt() == null ? 0 : participant.getTotalDamageDealt());
         dto.setDamageTaken(participant.getTotalDamageTaken() == null ? 0 : participant.getTotalDamageTaken());
+
+        // OZ01: per-match and per-player metrics
+        dto.setGoldPerMinute(participant.getGoldPerMinute());
+        dto.setCsPerMinute(participant.getCsPerMinute());
+        dto.setLaneQuestCompletionTimeInSeconds(participant.getLaneQuestCompletionTimeInSeconds());
+
+        if (match != null) {
+            dto.setAverageRank(match.getAverageRank());
+        }
+
+        // MZ03f / OZ01e: runes & items of the searched player in this match
+        if (participant.getRunes() != null) {
+            List<Integer> runeIds = participant.getRunes().stream()
+                    .filter(Objects::nonNull)
+                    .map(ParticipantRune::getRuneId)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+            dto.setRuneIds(runeIds);
+
+            // Resolve rune IDs to names/icons via Data Dragon
+            List<RuneLookupService.RuneInfo> infos = runeLookupService.resolveRunes(runeIds);
+            if (infos != null && !infos.isEmpty()) {
+                List<RuneDTO> runes = infos.stream()
+                        .map(info -> {
+                            RuneDTO r = new RuneDTO();
+                            r.setId(info.getId());
+                            r.setName(info.getName());
+                            r.setIcon(info.getIcon());
+                            return r;
+                        })
+                        .collect(Collectors.toList());
+                dto.setRunes(runes);
+            }
+        }
+
+        if (participant.getItems() != null) {
+            dto.setItemIds(
+                    participant.getItems().stream()
+                            .filter(Objects::nonNull)
+                            .map(ParticipantItem::getItemId)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
+            );
+        }
 
         if (participant.getMatch() != null && participant.getTeamId() != null) {
             List<MatchParticipant> allParticipants =

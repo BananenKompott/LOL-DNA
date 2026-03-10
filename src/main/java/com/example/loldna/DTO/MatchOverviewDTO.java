@@ -20,6 +20,20 @@ MatchOverviewDTO {
     private int damageDealt;
     private int damageTaken;
 
+    // OZ01 / MZ03: additional per-match & per-player metrics
+    private Double goldPerMinute;
+    private Double csPerMinute;
+    private Integer laneQuestCompletionTimeInSeconds;
+
+    // Optional: average rank of all team mates in this match (if available on Match entity)
+    private String averageRank;
+
+    // MZ03f / OZ01e: runes and items of the searched player in this match
+    // runeIds kept for backward compatibility, but preferred consumer field is runes
+    private List<Integer> runeIds;
+    private List<RuneDTO> runes;
+    private List<Integer> itemIds;
+
     private List<TeamMateDTO> teamMates;
     private List<EnemyDTO> enemyTeam;
 
@@ -93,6 +107,62 @@ MatchOverviewDTO {
 
     public void setDamageTaken(int damageTaken) {
         this.damageTaken = damageTaken;
+    }
+
+    public Double getGoldPerMinute() {
+        return goldPerMinute;
+    }
+
+    public void setGoldPerMinute(Double goldPerMinute) {
+        this.goldPerMinute = goldPerMinute;
+    }
+
+    public Double getCsPerMinute() {
+        return csPerMinute;
+    }
+
+    public void setCsPerMinute(Double csPerMinute) {
+        this.csPerMinute = csPerMinute;
+    }
+
+    public Integer getLaneQuestCompletionTimeInSeconds() {
+        return laneQuestCompletionTimeInSeconds;
+    }
+
+    public void setLaneQuestCompletionTimeInSeconds(Integer laneQuestCompletionTimeInSeconds) {
+        this.laneQuestCompletionTimeInSeconds = laneQuestCompletionTimeInSeconds;
+    }
+
+    public String getAverageRank() {
+        return averageRank;
+    }
+
+    public void setAverageRank(String averageRank) {
+        this.averageRank = averageRank;
+    }
+
+    public List<Integer> getRuneIds() {
+        return runeIds;
+    }
+
+    public void setRuneIds(List<Integer> runeIds) {
+        this.runeIds = runeIds;
+    }
+
+    public List<Integer> getItemIds() {
+        return itemIds;
+    }
+
+    public void setItemIds(List<Integer> itemIds) {
+        this.itemIds = itemIds;
+    }
+
+    public List<RuneDTO> getRunes() {
+        return runes;
+    }
+
+    public void setRunes(List<RuneDTO> runes) {
+        this.runes = runes;
     }
 
     public List<TeamMateDTO> getTeamMates() {
