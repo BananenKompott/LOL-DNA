@@ -264,8 +264,7 @@ const enemyTeam = computed(() => safeArray(props.match.enemyTeam));
 }
 
 .kda {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-  monospace;
+  font-family: "Segoe UI";
   opacity: 0.9;
   color: var(--mc-text-2);
 }
@@ -389,8 +388,7 @@ const enemyTeam = computed(() => safeArray(props.match.enemyTeam));
 }
 
 .kda-mini {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-  monospace;
+  font-family: "Segoe UI";
   font-size: 12px;
   color: var(--mc-text-2);
 }
@@ -436,7 +434,7 @@ const enemyTeam = computed(() => safeArray(props.match.enemyTeam));
 }
 
 .num {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Segoe UI";
   font-size: 12px;
   color: var(--mc-text-2);
 }

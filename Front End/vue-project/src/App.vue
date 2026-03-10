@@ -33,13 +33,18 @@ async function search() {
 <template>
   <Header/>
   <main>
-    <input
-        v-model="query"
-        type="search"
-        placeholder="gameName#tagLine"
-        @keyup.enter="search"
-    />
-    <button type="button" @click="search">Search</button>
+    <div style="text-align: center">
+      <input
+          v-model="query"
+          type="search"
+          placeholder="gameName#tagLine"
+          @keyup.enter="search"
+          style=""
+      />
+      &nbsp;&nbsp;&nbsp;
+      <button type="button" @click="search">&nbsp;&nbsp;Search&nbsp;&nbsp;</button>
+    </div>
+    <br>
     <div v-if="fetchSuccess">
       <PlayerCard :playerData="playerData"/>
     </div>
@@ -47,5 +52,30 @@ async function search() {
 </template>
 
 <style scoped>
+* {
+  color: #ffffff;
+}
 
+input {
+  color: black;
+  align-content: center;
+  border-radius: 5px;
+  border-color: rgba(0,0,0,0);
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+button {
+  color: white;
+  border-radius: 5px;
+  border-color: rgba(0,0,0,0);
+  font-size: 1rem;
+  padding: 0.8rem;
+  background-color: #111827;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3c4f83;
+}
 </style>
