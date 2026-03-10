@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-class ParticipantRune {
+public class ParticipantRune {
 
     @Id
     @GeneratedValue

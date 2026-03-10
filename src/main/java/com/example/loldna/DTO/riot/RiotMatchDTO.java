@@ -90,6 +90,61 @@ public class RiotMatchDTO {
         private int goldEarned;
         private int totalMinionsKilled;
 
+        // Runes (perks) as provided by Match V5 (MZ03f / OZ01e)
+        // Real payload (simplified):
+        // "perks": {
+        //   "styles": [
+        //     { "selections": [ { "perk": 8005, ... }, ... ], "style": 8000 },
+        //     { "selections": [ { "perk": 8100, ... }, ... ], "style": 8100 }
+        //   ]
+        // }
+        private Perks perks;
+
+        public static class Perks {
+            private List<Style> styles;
+
+            public List<Style> getStyles() {
+                return styles;
+            }
+
+            public void setStyles(List<Style> styles) {
+                this.styles = styles;
+            }
+        }
+
+        public static class Style {
+            private List<Selection> selections;
+            private Integer style;
+
+            public List<Selection> getSelections() {
+                return selections;
+            }
+
+            public void setSelections(List<Selection> selections) {
+                this.selections = selections;
+            }
+
+            public Integer getStyle() {
+                return style;
+            }
+
+            public void setStyle(Integer style) {
+                this.style = style;
+            }
+        }
+
+        public static class Selection {
+            private Integer perk;
+
+            public Integer getPerk() {
+                return perk;
+            }
+
+            public void setPerk(Integer perk) {
+                this.perk = perk;
+            }
+        }
+
         public String getPuuid() {
             return puuid;
         }
@@ -200,6 +255,14 @@ public class RiotMatchDTO {
 
         public void setTotalMinionsKilled(int totalMinionsKilled) {
             this.totalMinionsKilled = totalMinionsKilled;
+        }
+
+        public Perks getPerks() {
+            return perks;
+        }
+
+        public void setPerks(Perks perks) {
+            this.perks = perks;
         }
     }
 }
