@@ -27,6 +27,43 @@ It fetches player and match-related data through the **Riot API** and exposes it
 - Project also includes Node/NPM setup
 
 ## Project Structure
+```text
+LOL-DNA/
+├── data/
+│   └── ...                          # project data files
+├── Front End/
+│   ├── package.json                 # frontend-related npm config
+│   └── vue-project/
+│       ├── public/
+│       │   └── favicon.ico
+│       ├── src/
+│       │   ├── assets/              # static frontend assets
+│       │   ├── components/          # Vue components
+│       │   ├── App.vue              # root Vue component
+│       │   └── main.js              # frontend entry point
+│       ├── index.html               # Vite HTML entry
+│       ├── package.json             # Vue app dependencies
+│       └── vite.config.js           # Vite configuration
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/loldna/  # backend Java source code
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── application.yml
+│   │       └── templates/
+│   │           └── ServiceImpl.java.ft
+│   └── test/
+│       └── java/
+│           └── com/example/loldna/  # backend test source code
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+├── package.json
+├── package-lock.json
+├── pom.xml
+└── README.md
+```
 
 
 ## Configuration
@@ -35,51 +72,79 @@ The application expects a Riot API key through environment variables or a local 
 
 ### `application.yml`
 The Riot API key is read like this:
-
+```yaml
+ riot:
+   api:
+     key: ${RIOT_API_KEY:}
+```
 
 ### Option 1: Environment variable
 Set an environment variable named:
-
+```text
+RIOT_API_KEY
+```
 
 ### Option 2: Local config file
 Create a local file:
-
+```text
+ src/main/resources/application-local.yml
+ ```
 
 Example:
-
+```yaml
+ riot:
+   api:
+     key: YOUR_RIOT_API_KEY
+ ```
 
 > `application-local.yml` is intended for local overrides and should not be committed.
 
 ## Database
 
-The project uses an **H2 file database** stored at:./data/mydb
+The project uses an **H2 file database** stored at:
+```text
+./data/mydb
+```
 
-Configured in `application.properties`: properties spring.datasource.url=jdbc:h2:file:./data/mydb spring.jpa.hibernate.ddl-auto=update
+Configured in `application.properties`: 
+```properties
+ spring.datasource.url=jdbc:h2:file:./data/mydb spring.jpa.hibernate.ddl-auto=update
+ ```
 
 
 ## Running the Backend
 
 ### With Maven Wrapper
 On Windows:
-bash mvnw.cmd spring-boot:run
+```bash
+ mvnw.cmd spring-boot:run
+ ```
 
 
 On macOS/Linux:
-bash ./mvnw spring-boot:run
+```bash
+ ./mvnw spring-boot:run
+ ```
 
 ### Or build first
-bash mvnw.cmd clean install
+```bash
+ mvnw.cmd clean install
+ ```
 
 Then run the jar from `target/`.
 
 ## API Endpoints
 
 ### Get player overview
-http GET /api/players/{gameName}/{tagLine}
+```http
+ GET /api/players/{gameName}/{tagLine}
+ ```
 
 Example:
 
-http GET /api/players/Schneckify/Lost
+```http
+ GET /api/players/Schneckify/Lost
+ ```
 
 
 ## Development Notes
@@ -107,4 +172,4 @@ Make sure you have:
 
 ## License
 
-This project is for educational / personal development use unless you define a license separately.
+This project is for educational / personal development purposes only.
