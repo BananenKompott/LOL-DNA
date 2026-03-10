@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local override configs with secrets (not committed)
+application-local.yml
+application-secrets.yml

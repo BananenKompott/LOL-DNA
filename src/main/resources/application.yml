@@ -1,3 +1,8 @@
 riot:
   api:
-    key: RGAPI-f4620930-e5fe-4925-96dd-eabce4c924c8
+    # Loaded from an external, git-ignored file or environment variable.
+    # Example (application-local.yml, not committed):
+    # riot:
+    #   api:
+    #     key: RGAPI-xxxx
+    key: ${RIOT_API_KEY:}
