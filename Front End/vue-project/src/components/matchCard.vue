@@ -56,7 +56,14 @@ const enemyTeam = computed(() => safeArray(props.match.enemyTeam));
     <div class="body">
       <div class="top">
         <div class="title">
-          <strong>{{ match.matchId }}</strong>
+          <b>Runen</b>
+          <p>{{match.runes?.[0]?.name ?? "Not available"}}</p>
+          <p>{{match.runes?.[1]?.name ?? ""}}</p>
+          <p>{{match.runes?.[2]?.name ?? ""}}</p>
+          <p>{{match.runes?.[3]?.name ?? ""}}</p>
+          <p>{{match.runes?.[4]?.name ?? ""}}</p>
+          <p>{{match.runes?.[5]?.name ?? ""}}</p>
+
           <div class="sub">{{ formatDateTime(match.gameStartTime) }}</div>
         </div>
 

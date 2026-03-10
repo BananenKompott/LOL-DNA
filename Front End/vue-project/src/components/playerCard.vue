@@ -8,7 +8,9 @@ const props = defineProps({
 
 <template>
   <section>
-    <h2>{{ playerData.gameName }}'s Recent Matches</h2>
+    <h2>{{ playerData.gameName }}'s Recent Matches (Winrate: {{playerData.winRateLast20}}%  )</h2>
+
+    <h2>Rank: {{playerData.rank}} {{playerData.tier}} {{playerData.leaguePoints}} LP</h2>
 
     <div v-if="Array.isArray(playerData.matches) && playerData.matches.length">
       <MatchCard
