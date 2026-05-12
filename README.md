@@ -1,5 +1,6 @@
 # LOL-DNA
 
+Note: This Web-App was build for education purposes and is not production ready. It was inspired by [u.gg](https://u.gg), [op.gg](https://op.gg) and [dpm.lol](https://dpm.lol) and is a minimal clone of these applications.
 LOL-DNA is a full-stack League of Legends stats application built with **Spring Boot**, **Spring Data JPA**, **H2 Database**, and a separate frontend workspace.  
 It fetches player and match-related data through the **Riot API** and exposes it through REST endpoints.
 
